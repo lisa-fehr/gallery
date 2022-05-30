@@ -1,6 +1,6 @@
 <template>
     <div>
-        <gallery :filters="filters"/>
+        <gallery :filters="filters" :routes="JSON.parse(routes)"/>
     </div>
 </template>
 <script>
@@ -11,6 +11,10 @@
         props: {
             filters: {
                 type: String,
+            },
+            routes: {
+                type: String,
+                default: '{"portfolio":"portfolio"}',
             }
         }
     };

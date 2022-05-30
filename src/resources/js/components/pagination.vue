@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-full justify-between px-5 bg-stone-800 rounded" v-if="data">
+    <div class="flex w-full justify-between md:px-5 bg-stone-800 rounded" v-if="data">
         <a :href="previousUrl" @click.prevent="$emit('previous', previousUrl)" :disabled="disablePrevious"
            class="py-1"
            :class="{'cursor-not-allowed  text-neutral-500': disablePrevious, 'hover:text-orange-400': !disablePrevious}">

@@ -1,16 +1,16 @@
 <template>
     <div v-if="!loading">
-        <a v-if="hasCurrent()" :href="parentUrl()" class="pl-5 pt-5 flex w-full items-center">
+        <a v-if="hasCurrent()" :href="parentUrl()" class="md:pl-5 md:pt-5 flex w-full items-center">
             <arrow>
                 Back to {{ parentName() }}
             </arrow>
         </a>
-        <div class="flex pl-2">
-            <div class="p-5 flex w-32">
+        <div class="flex flex-wrap md:pl-2 pb-5">
+            <div class="pt-5 pr-2 md:px-5 flex">
                 <star active/>
                 all
             </div>
-            <a v-for="nav in navigation.children" :key="nav.name" class="p-5 flex w-32"
+            <a v-for="nav in navigation.children" :key="nav.name" class="pt-5 pr-2 md:px-5 flex"
                :href="childUrl(nav)">
                 <star/>
                 {{ nav.display_name || nav.name }}
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+    import { isNotProduction } from '../config';
     import Star from '../components/star';
     import Arrow from '../components/arrow';
 
@@ -30,10 +31,13 @@
                 default: null,
                 type: String,
             },
+            routes: {
+                default: {},
+                type: Object,
+            },
         },
         data() {
             return {
-                portfolioUrl: '/portfolio/',
                 loading: true,
                 navigation: {
                     default: () => {
@@ -47,7 +51,9 @@
         },
         methods: {
             getFilters() {
-                axios.get('/tags/' + (this.filters ?? '')).then(response => {
+                let url = isNotProduction ? '/tags.json' : '/tags/';
+
+                axios.get(url + (this.filters ?? '')).then(response => {
                     this.navigation = response.data;
                     this.removeTheAllTag();
                     this.loading = false;
@@ -69,13 +75,22 @@
             },
             parentUrl() {
                 if (!this.navigation.current.parent) {
-                    return this.portfolioUrl;
+                    return '/' + this.routes['portfolio'];
                 }
-                return this.portfolioUrl + this.navigation.current.parent.name;
+                if (this.routes[this.navigation.current.parent.name]) {
+                    return '/' + this.routes[this.navigation.current.parent.name];
+                }
+                return '/' + this.navigation.current.parent.name;
             },
             childUrl(nav) {
-                if (nav.display_name) {
-                    return nav.parent.name + '/' + nav.display_name;
+                if (this.routes[nav.name]) {
+                    return '/' + this.routes[nav.name];
+                }
+                if (nav.parent?.name && ['events', 'unsorted', 'photos', 'digital'].includes(nav.parent.name)){
+                    return '/' + nav.name;
+                }
+                if (nav.parent?.name) {
+                    return '/' + nav.parent.name + '/' + nav.name;
                 }
                 return '/' + nav.name;
             }

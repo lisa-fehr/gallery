@@ -21,19 +21,23 @@ class TagController extends Controller
         }
 
         $names = explode(',', $filters);
+        $currentFilter = $names[0];
+        $childFilters = array_slice($names, 1);
 
         return response()->json([
-            'current' => UberTags::where('name', $names[0])
+            'current' => UberTags::where('name', $currentFilter)
                 ->with('parent')
                 ->first(),
             'children' =>
-                UberTags::whereIn('name', $names)
-                    ->children()
+                UberTags::whereIn('name', $childFilters)
+                    //->children()
                     ->with('parent')
+                    ->orderBy('name')
                     ->orderBy('parent')
                     ->get()
-                    ->filter(function ($tag) {
-                        return Route::has($tag->name);
+                    ->filter(function ($tag) use ($childFilters) {
+                        $array = $tag->toArray();
+                        return Route::has($tag->name) && ($array['parent'] && !in_array($array['parent']['name'], $childFilters));
                     })
         ]);
     }

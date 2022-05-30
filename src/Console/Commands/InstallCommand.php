@@ -29,6 +29,8 @@ class InstallCommand extends Command
     {
         $this->comment('Publishing Gallery Assets...');
         $this->callSilent('vendor:publish', ['--tag' => 'public', '--force' => true]);
+        $this->comment('Publishing Gallery Config...');
+        $this->callSilent('vendor:publish', ['--tag' => 'config']);
 
         $this->info('Gallery scaffolding installed successfully.');
     }

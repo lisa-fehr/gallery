@@ -454,9 +454,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
-.w-32 {
-  width: 8rem;
-}
 .w-5 {
   width: 1.25rem;
 }
@@ -479,11 +476,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .cursor-not-allowed {
   cursor: not-allowed;
 }
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .flex-col {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .items-center {
   align-items: center;
@@ -512,28 +512,25 @@ Ensure the default browser behavior of the `hidden` attribute.
   -o-object-fit: scale-down;
      object-fit: scale-down;
 }
-.p-5 {
-  padding: 1.25rem;
-}
 .p-1 {
   padding: 0.25rem;
 }
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.pl-5 {
-  padding-left: 1.25rem;
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 .pt-5 {
   padding-top: 1.25rem;
 }
-.pl-2 {
-  padding-left: 0.5rem;
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .text-neutral-500 {
   --tw-text-opacity: 1;
@@ -569,5 +566,32 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+@media (min-width: 768px) {
+
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .md\:p-5 {
+    padding: 1.25rem;
+  }
+
+  .md\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .md\:pl-5 {
+    padding-left: 1.25rem;
+  }
+
+  .md\:pt-5 {
+    padding-top: 1.25rem;
+  }
+
+  .md\:pl-2 {
+    padding-left: 0.5rem;
+  }
 }
 
