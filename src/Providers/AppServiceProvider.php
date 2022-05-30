@@ -4,6 +4,7 @@ namespace LisaFehr\Gallery\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LisaFehr\Gallery\Console\Commands\GenerateImages;
+use LisaFehr\Gallery\Console\Commands\InstallCommand;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,14 +15,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->publishes([
-            __DIR__ . '/resources/js/components' =>
-                resource_path('assets/lisa-fehr/gallery/components'
-                )], 'vue-components');
-        $this->publishes([
-            __DIR__ . '/resources/js/views' =>
-                resource_path('assets/lisa-fehr/gallery/views'
-                )], 'vue-views');
+//        $this->publishes([
+//            __DIR__ . '/../resources/js/components' =>
+//                resource_path('assets/lisa-fehr/gallery/components'
+//                )], 'vue-components');
+//        $this->publishes([
+//            __DIR__ . '/../resources/js/views' =>
+//                resource_path('assets/lisa-fehr/gallery/views'
+//                )], 'vue-views');
     }
 
     /**
@@ -32,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/lisa-fehr/gallery'),
+            __DIR__.'/../../public' => public_path('vendor/lisa-fehr/gallery'),
         ], 'public');
         // php artisan vendor:publish --tag=public --force
 
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 GenerateImages::class,
+                InstallCommand::class,
             ]);
         }
     }

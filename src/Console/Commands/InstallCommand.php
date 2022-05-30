@@ -18,7 +18,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install all of the Horizon resources';
+    protected $description = 'Install all of the Gallery resources';
 
     /**
      * Execute the console command.
@@ -28,10 +28,11 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->comment('Publishing Gallery Assets...');
-        $this->callSilent('vendor:publish', ['--tag' => 'vue-components']);
+        $this->callSilent('vendor:publish', ['--tag' => 'public']);
+        //$this->callSilent('vendor:publish', ['--tag' => 'vue-components']);
 
-        $this->comment('Publishing Gallery View...');
-        $this->callSilent('vendor:publish', ['--tag' => 'vue-views']);
+        //$this->comment('Publishing Gallery View...');
+        //$this->callSilent('vendor:publish', ['--tag' => 'vue-views']);
 
         $this->info('Gallery scaffolding installed successfully.');
     }
