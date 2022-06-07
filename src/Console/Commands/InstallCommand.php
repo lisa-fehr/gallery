@@ -28,7 +28,7 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->comment('Publishing Gallery Assets...');
-        $this->callSilent('vendor:publish', ['--tag' => 'public']);
+        $this->callSilent('vendor:publish', ['--tag' => 'public', '--force' => true]);
         //$this->callSilent('vendor:publish', ['--tag' => 'vue-components']);
 
         //$this->comment('Publishing Gallery View...');

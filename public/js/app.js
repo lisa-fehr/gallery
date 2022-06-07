@@ -19707,10 +19707,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     childUrl: function childUrl(nav) {
       if (nav.display_name) {
-        return this.portfolioUrl + nav.parent.name + '/' + nav.display_name;
+        return nav.parent.name + '/' + nav.display_name;
       }
 
-      return this.portfolioUrl + nav.name;
+      return '/' + nav.name;
     }
   }
 });
@@ -20307,8 +20307,8 @@ __webpack_require__(/*! ./bootstrap */ "./src/resources/js/bootstrap.js");
 
 
 
-var mountEl = document.querySelector("#app");
-(0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_views_app_vue__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread({}, mountEl.dataset)).mount("#app");
+var mountEl = document.querySelector("#gallery-app");
+(0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_views_app_vue__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread({}, mountEl.dataset)).mount("#gallery-app");
 
 /***/ }),
 
@@ -39064,8 +39064,8 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/public/js/app": 0,
-/******/ 			"public/css/app": 0
+/******/ 			"/js/app": 0,
+/******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -39120,8 +39120,8 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["public/css/app"], () => (__webpack_require__("./src/resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["public/css/app"], () => (__webpack_require__("./src/resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./src/resources/js/app.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./src/resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -77,9 +77,9 @@
             },
             childUrl(nav) {
                 if (nav.display_name) {
-                    return this.portfolioUrl + nav.parent.name + '/' + nav.display_name;
+                    return nav.parent.name + '/' + nav.display_name;
                 }
-                return this.portfolioUrl + nav.name;
+                return '/' + nav.name;
             }
         }
     };
