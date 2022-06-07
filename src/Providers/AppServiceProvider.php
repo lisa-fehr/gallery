@@ -37,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
         ], 'public');
         // php artisan vendor:publish --tag=public --force
 
+        $this->mergeConfigFrom(__DIR__ . '/config/filesystems.php', 'filesystems');
+
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         if ($this->app->runningInConsole()) {
             $this->commands([
