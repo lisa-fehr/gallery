@@ -1,17 +1,15 @@
 <template>
-    <div>
-        <div class="flex flex-col h-screen">
-            <navigation :filters="filters"></navigation>
-            <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
-            <div class="grid grid-cols-6 gap-2 p-5 bg-yellow-600">
-                <thumbnail v-for="(image, index) in images" :image="image.thumbnail" :key="`image-${index}`" @click.native="(currentImage = image.image)"/>
-            </div>
-            <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
+    <div class="flex flex-col">
+        <navigation :filters="filters"></navigation>
+        <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
+        <div class="grid grid-cols-6 gap-2 p-5">
+            <thumbnail v-for="(image, index) in images" :image="image.thumbnail" :key="`image-${index}`" @click.native="(currentImage = image.image)"/>
         </div>
-        <teleport to="body">
-            <modal v-if="currentImage" :image="currentImage" @close="currentImage=null" />
-        </teleport>
+        <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
     </div>
+    <teleport to="body">
+        <modal v-if="currentImage" :image="currentImage" @close="currentImage=null" />
+    </teleport>
 </template>
 
 <script>

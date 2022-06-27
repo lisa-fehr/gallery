@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/gallery', GalleryController::class);
 // /gallery?filter[tags]=California2014
 Route::get('/tags/{filters?}', TagController::class);
