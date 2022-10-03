@@ -1,0 +1,75 @@
+{
+    "current_page": 1,
+    "data": [
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        },
+        {
+            "image": "\/gallery\/missing.gif",
+            "thumbnail": "\/gallery\/missing.gif"
+        }
+    ],
+    "first_page_url": "\/gallery?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "\/gallery?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "\/gallery?page=1",
+            "label": "1",
+            "active": true
+        }
+    ],
+    "next_page_url": "",
+    "path": "\/gallery",
+    "per_page": 12,
+    "prev_page_url": null,
+    "to": 12,
+    "total": 12
+}

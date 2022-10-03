@@ -1,7 +1,7 @@
 # gallery
 Packaged version of the recreate gallery project
 
-Run:
+## Run:
 
 `composer require lisa-fehr/gallery`
 
@@ -13,19 +13,48 @@ Run:
 
 `npm run development`
 
+## Add the css and js files to your layout file:
+```html
+<link rel="stylesheet" href="{{ asset('vendor/lisa-fehr/gallery/css/app.css') }}" type="text/css" media="screen"/>
+...
+<script src="{{mix('js/app.js', 'vendor/lisa-fehr/gallery')}}"></script>
+```
 
-
-Add this div to a view called portfolio:
+## Add this div to a view called `portfolio`:
 ```html
 <div id="gallery-app" class="text-sm w-full" data-filters="{{$filter['tags'] ?? ''}}"></div>
 ```
 
-Add this kind of code to routes where tags match the uber_tags table names you want to show:
+You can also override routes with inconsistent patterns:
+```javascript
+{
+    "tag": "path from root - no starting slash needed"
+}
+```
+```html
+<div id="gallery-app" class="text-sm w-full" 
+    data-filters="{{$filter['tags'] ?? ''}}"
+    data-routes='{"portfolio":"portfolio","Folder2005":"Folder\/2005"}'
+></div>
+```
+
+## Add to routes file
+Add this kind of code to routes, where `tags` match the `uber_tags` table (route `name` is required to match the tag):
 
 ```php
 Route::get('photos', function () {
 
-return view('portfolio')->with('filter', ['tags' => 'photos,california2014']);
+return view('portfolio')->with('filter', ['tags' => 'California,California2005,California2009,California2014']);
 
 })->name('photos');
 ```
+
+Or use the Tag model to get all the children:
+```php
+Route::get('California', function () {
+    $children = UberTags::where('name', 'california')->allChildren()->pluck('name')->implode(',');
+    return view('portfolio')->with('filter', ['tags' => 'california,' . $children]);
+})->name('California');
+```
+
+If the named route for the tag doesn't exist, it will not show up in navigation to prevent broken links.

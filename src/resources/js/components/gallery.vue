@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-col">
-        <navigation :filters="filters"></navigation>
+        <navigation :filters="filters" :routes="routes"></navigation>
         <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
-        <div class="grid grid-cols-6 gap-2 p-5">
-            <thumbnail v-for="(image, index) in images" :image="image.thumbnail" :key="`image-${index}`" @click.native="(currentImage = image.image)"/>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-2 py-5 md:p-5">
+            <thumbnail v-for="(image, index) in images" :alt="image.alt" :image="image.thumbnail" :key="`image-${index}`" @click.native="(currentImage = image.image)"/>
         </div>
         <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
     </div>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+    import { isNotProduction } from '../config';
     import Navigation from '../components/navigation';
 
     import Thumbnail from './thumbnail';
@@ -26,6 +27,9 @@
             filters: {
                 default: null,
                 type: String,
+            },
+            routes: {
+                type: Object,
             }
         },
         data() {
@@ -74,7 +78,8 @@
                 window.history.pushState({}, '', url);
             },
             galleryUrl(page) {
-                let url = '/gallery';
+                let url = isNotProduction ? '/gallery.json' : '/gallery';
+
                 url += "?page=" + page;
                 if (this.filters) {
                     url += '&filter[tags]=' + this.filters;
