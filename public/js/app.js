@@ -20044,7 +20044,10 @@ var _hoisted_2 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": "shadow",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
+    onContextmenu: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return _ctx.$emit("close");
+    }, ["prevent"])),
+    onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.$emit("close");
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -20052,7 +20055,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "object-scale-down max-w-screen max-h-screen"
   }, null, 8
   /* PROPS */
-  , _hoisted_2)])]);
+  , _hoisted_2)])], 32
+  /* HYDRATE_EVENTS */
+  );
 }
 
 /***/ }),

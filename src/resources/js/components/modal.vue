@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow" @click='$emit("close")'>
+    <div class="shadow" @contextmenu.prevent='$emit("close")' @click='$emit("close")'>
         <div class="modal">
             <img :src="image" class="object-scale-down max-w-screen max-h-screen"/>
         </div>
