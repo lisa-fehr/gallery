@@ -30,7 +30,7 @@ class UberTags extends Model
         'parent',
     ];
 
-    public function scopeAllChildren(Builder $builder)
+    public function scopeAllChildren(Builder $builder) : Builder
     {
         $children = $builder->select('children', 'id')->having('children', '=', 1);
         $parents = $builder->pluck('id');
@@ -42,10 +42,10 @@ class UberTags extends Model
             $collect = $collect->merge($parents);
             $children = $current->contains('children', '1');
         }
-        return self::whereIn('id', $collect);
+        return self::query()->whereIn('id', $collect);
     }
 
-    public function scopeChildren(Builder $builder)
+    public function scopeChildren(Builder $builder) : Builder
     {
         $parents = $builder->pluck('id');
         $collect = collect([]);
@@ -54,10 +54,10 @@ class UberTags extends Model
         $parents = $current->pluck('id');
         $collect = $collect->merge($parents);
 
-        return self::whereIn('id', $collect);
+        return self::query()->whereIn('id', $collect);
     }
 
-    public function parent()
+    public function parent() : \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(self::class, 'id', 'parent');
     }

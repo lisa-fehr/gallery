@@ -2,6 +2,8 @@
 
 namespace LisaFehr\Gallery\Providers;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use LisaFehr\Gallery\Console\Commands\GenerateImages;
 use LisaFehr\Gallery\Console\Commands\InstallCommand;
@@ -36,5 +38,13 @@ class AppServiceProvider extends ServiceProvider
                 InstallCommand::class,
             ]);
         }
+
+        Storage::disk('gallery')->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
+            return URL::temporarySignedRoute(
+                'gallery.temp',
+                $expiration,
+                array_merge($options, ['path' => $path])
+            );
+        });
     }
 }

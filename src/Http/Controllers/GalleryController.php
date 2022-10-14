@@ -6,7 +6,7 @@ use LisaFehr\Gallery\Models\UberGallery;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class GalleryController extends Controller
+class GalleryController
 {
     public function __invoke()
     {

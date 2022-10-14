@@ -2,6 +2,7 @@
 
 namespace LisaFehr\Gallery\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,7 @@ class UberGallery extends Model
         'text',
     ];
 
-    public function tag()
+    public function tag() : \Illuminate\Database\Eloquent\Relations\HasOneThrough
     {
         return $this->hasOneThrough(
             UberTags::class,
@@ -35,23 +36,23 @@ class UberGallery extends Model
         );
     }
 
-    public function getImageAttribute()
+    public function getImageAttribute() : string
     {
         $url = $this->tag->directory . '/' . $this->img . '.' . $this->type;
         if (Storage::disk('gallery')->exists($url)) {
-            return Storage::disk('gallery')->url($url);
+            return Storage::disk('gallery')->temporaryUrl($url, Carbon::now()->addDay());
         }
         return Storage::disk('gallery')->url('/missing.gif');
     }
 
-    public function getThumbnailAttribute()
+    public function getThumbnailAttribute() : ?string
     {
         if (! $this->tag) {
             return null;
         }
         $url = $this->tag->directory . '/t/' . $this->thumb;
         if (Storage::disk('gallery')->exists($url)) {
-            return Storage::disk('gallery')->url($url);
+            return Storage::disk('gallery')->temporaryUrl($url, Carbon::now()->addDay());
         }
         return Storage::disk('gallery')->url('/missing.gif');
     }
@@ -65,7 +66,7 @@ class UberGallery extends Model
             ->whereIn('uber_tags.name', $tags);
     }
 
-    public function toArray()
+    public function toArray() : array
     {
         return [
             'image' => $this->image,
