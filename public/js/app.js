@@ -19987,6 +19987,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: image.alt,
       image: image.thumbnail,
       key: "image-".concat(index),
+      onContextmenu: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"])),
       onClick: function onClick($event) {
         return $data.currentImage = image.image;
       }
@@ -20007,7 +20008,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [$data.currentImage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modal, {
     key: 0,
     image: $data.currentImage,
-    onClose: _cache[0] || (_cache[0] = function ($event) {
+    onClose: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentImage = null;
     })
   }, null, 8
@@ -20052,7 +20053,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: $props.image,
-    "class": "object-scale-down max-w-screen max-h-screen"
+    "class": "cursor-pointer object-scale-down max-w-screen max-h-screen"
   }, null, 8
   /* PROPS */
   , _hoisted_2)])], 32
@@ -20295,7 +20296,7 @@ var _hoisted_1 = ["src", "alt"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
-    "class": "w-full",
+    "class": "transition delay-150 duration-300 ease-in-out hover:scale-90 cursor-pointer w-full",
     src: $props.image,
     alt: $props.alt
   }, null, 8

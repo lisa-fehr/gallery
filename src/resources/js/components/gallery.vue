@@ -3,7 +3,7 @@
         <navigation :filters="filters" :routes="routes"></navigation>
         <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
         <div class="grid grid-cols-2 md:grid-cols-6 gap-2 py-5 md:p-5">
-            <thumbnail v-for="(image, index) in images" :alt="image.alt" :image="image.thumbnail" :key="`image-${index}`" @click.native="(currentImage = image.image)"/>
+            <thumbnail v-for="(image, index) in images" :alt="image.alt" :image="image.thumbnail" :key="`image-${index}`" @contextmenu.prevent @click.native="(currentImage = image.image)"/>
         </div>
         <pagination @next="next" @previous="previous" @goTo="goToPage" :data="pagination" />
     </div>
