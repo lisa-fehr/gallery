@@ -42,7 +42,7 @@ class UberGallery extends Model
         if (Storage::disk('gallery')->exists($url)) {
             return Storage::disk('gallery')->temporaryUrl($url, Carbon::now()->addDay());
         }
-        return Storage::disk('gallery')->url('/missing.gif');
+        return Storage::disk('gallery')->url('/missing-image.gif');
     }
 
     public function getThumbnailAttribute() : ?string
@@ -54,7 +54,7 @@ class UberGallery extends Model
         if (Storage::disk('gallery')->exists($url)) {
             return Storage::disk('gallery')->temporaryUrl($url, Carbon::now()->addDay());
         }
-        return Storage::disk('gallery')->url('/missing.gif');
+        return Storage::disk('gallery')->url('/missing-thumbnail.gif');
     }
 
     public function scopeTags(Builder $builder, ...$tags)

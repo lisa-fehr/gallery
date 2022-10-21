@@ -19629,7 +19629,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     image: {
       required: false,
-      type: String
+      type: Object,
+      "default": null
     }
   }
 });
@@ -19989,7 +19990,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: "image-".concat(index),
       onContextmenu: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"])),
       onClick: function onClick($event) {
-        return $data.currentImage = image.image;
+        return $data.currentImage = image;
       }
     }, null, 8
     /* PROPS */
@@ -20039,9 +20040,20 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
+  key: 0,
   "class": "modal"
 };
-var _hoisted_2 = ["src"];
+var _hoisted_2 = {
+  "class": "rounded-t-md flex justify-between bg-black opacity-75 text-base text-gray-500 p-2"
+};
+
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Click to Close", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_4 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": "shadow",
@@ -20051,12 +20063,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.$emit("close");
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: $props.image,
-    "class": "cursor-pointer object-scale-down max-w-screen max-h-screen"
+  }, [$props.image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.image.alt), 1
+  /* TEXT */
+  ), _hoisted_3]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $props.image.image,
+    "class": "rounded-b-md cursor-pointer object-scale-down max-w-screen max-h-screen"
   }, null, 8
   /* PROPS */
-  , _hoisted_2)])], 32
+  , _hoisted_4)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 32
   /* HYDRATE_EVENTS */
   );
 }
