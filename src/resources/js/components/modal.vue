@@ -1,7 +1,11 @@
 <template>
-    <div class="shadow" @click='$emit("close")'>
-        <div class="modal">
-            <img :src="image" class="object-scale-down max-w-screen max-h-screen"/>
+    <div class="shadow" @contextmenu.prevent='$emit("close")' @click='$emit("close")'>
+        <div class="modal" v-if="image">
+            <div class="rounded-t-md flex justify-between bg-black opacity-75 text-base text-gray-500 p-2">
+                <div>{{ image.alt }}</div>
+                <div>Click to Close</div>
+            </div>
+            <img :src="image.image" class="rounded-b-md cursor-pointer object-scale-down max-w-screen max-h-screen"/>
         </div>
     </div>
 </template>
@@ -12,7 +16,8 @@
         props: {
             image: {
                 required: false,
-                type: String,
+                type: Object,
+                default: null
             },
         }
     };

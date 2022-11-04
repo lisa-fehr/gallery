@@ -10,6 +10,8 @@ use Intervention\Image\Facades\Image;
 
 class GenerateImages extends Command
 {
+    const MISSING_IMAGE_COLOR = '#ffb52e';
+
     const THUMBNAIL_WIDTH = 125;
     const THUMBNAIL_HEIGHT = 175;
     const THUMBNAIL_QUALITY = 75;
@@ -39,7 +41,7 @@ class GenerateImages extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle() : int
     {
         $originalImages = Storage::disk("gallery-originals")->allFiles();
 
@@ -58,6 +60,7 @@ class GenerateImages extends Command
         }
 
         $this->createMissingThumbnail();
+        $this->createMissingImage();
 
         return 0;
     }
@@ -82,7 +85,7 @@ class GenerateImages extends Command
                 ->save($thumbPath, self::THUMBNAIL_QUALITY, pathinfo($gallery->thumb, PATHINFO_EXTENSION));
 
             $image = Image::make($originalPath);
-            list($width, $height) = $this->calculateWidthHeight($image);
+            [$width, $height] = $this->calculateWidthHeight($image);
             $image->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($imagePath);
@@ -97,7 +100,7 @@ class GenerateImages extends Command
      * @param \Intervention\Image\Image $image
      * @return array
      */
-    private function calculateWidthHeight(\Intervention\Image\Image $image)
+    private function calculateWidthHeight(\Intervention\Image\Image $image) : array
     {
         $width = self::MAX_IMAGE_WIDTH;
         $height = self::MAX_IMAGE_HEIGHT;
@@ -116,15 +119,32 @@ class GenerateImages extends Command
         $img = Image::canvas(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT, '#ffa500');
         $img
         ->line(0, 0, self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT, function ($draw) {
-            $draw->color('#ffb52e');
+            $draw->color(self::MISSING_IMAGE_COLOR);
         })
         ->line(self::THUMBNAIL_WIDTH, 0, 0, self::THUMBNAIL_HEIGHT, function ($draw) {
-            $draw->color('#ffb52e');
+            $draw->color(self::MISSING_IMAGE_COLOR);
         })
-        ->text('Missing Image', 28, 20, function ($font) {
+        ->text('Missing Image', round(self::THUMBNAIL_WIDTH / 2 - 34), 20, function ($font) {
             $font->color('#000');
         });
-        $img->save(Storage::disk('gallery')->path('missing.gif'), 90, 'gif');
-        $this->info('Created missing image: ' . Storage::disk('gallery')->path('missing.gif'));
+        $img->save(Storage::disk('gallery')->path('missing-thumbnail.gif'), 90, 'gif');
+        $this->info('Created missing thumbnail: ' . Storage::disk('gallery')->path('missing-thumbnail.gif'));
+    }
+
+    private function createMissingImage()
+    {
+        $img = Image::canvas(self::MAX_IMAGE_WIDTH, self::MAX_IMAGE_HEIGHT, '#ffa500');
+        $img
+            ->line(0, 0, self::MAX_IMAGE_WIDTH, self::MAX_IMAGE_HEIGHT, function ($draw) {
+                $draw->color(self::MISSING_IMAGE_COLOR);
+            })
+            ->line(self::MAX_IMAGE_WIDTH, 0, 0, self::MAX_IMAGE_HEIGHT, function ($draw) {
+                $draw->color(self::MISSING_IMAGE_COLOR);
+            })
+            ->text('Missing Image', round(self::MAX_IMAGE_WIDTH / 2 - 34), 20, function ($font) {
+                $font->color('#000');
+            });
+        $img->save(Storage::disk('gallery')->path('missing-image.gif'), 90, 'gif');
+        $this->info('Created missing image: ' . Storage::disk('gallery')->path('missing-image.gif'));
     }
 }
