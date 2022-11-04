@@ -78,9 +78,9 @@
                 window.history.pushState({}, '', url);
             },
             galleryUrl(page) {
-                let url = isNotProduction ? '/gallery.json' : '/gallery';
+                let url = isNotProduction ? '/gallery.json' : `/gallery?timestamp=${new Date().getTime()}`;
 
-                url += "?page=" + page;
+                url += "&page=" + page;
                 if (this.filters) {
                     url += '&filter[tags]=' + this.filters;
                 }
@@ -88,7 +88,9 @@
                 return url;
             },
             getImages(page) {
-                axios.get(this.galleryUrl(page)).then(response => {
+                axios.get(this.galleryUrl(page), {
+                    headers: {'Content-Type': 'application/json', 'X-Robots-Tag': 'noindex, nofollow'}
+                }).then(response => {
                     const { data, current_page, from, last_page, per_page, to, total } = response.data;
                     this.images = data;
                     this.pagination = { current_page, from, last_page, per_page,to, total };

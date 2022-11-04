@@ -53,7 +53,9 @@
             getFilters() {
                 let url = isNotProduction ? '/tags.json' : '/tags/';
 
-                axios.get(url + (this.filters ?? '')).then(response => {
+                axios.get(url + (this.filters ?? ''), {
+                    headers: {'Content-Type': 'application/json', 'X-Robots-Tag': 'noindex, nofollow'}
+                }).then(response => {
                     this.navigation = response.data;
                     this.removeTheAllTag();
                     this.loading = false;

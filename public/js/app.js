@@ -19576,8 +19576,8 @@ __webpack_require__.r(__webpack_exports__);
       window.history.pushState({}, '', url);
     },
     galleryUrl: function galleryUrl(page) {
-      var url = _config__WEBPACK_IMPORTED_MODULE_0__.isNotProduction ? '/gallery.json' : '/gallery';
-      url += "?page=" + page;
+      var url = _config__WEBPACK_IMPORTED_MODULE_0__.isNotProduction ? '/gallery.json' : "/gallery?timestamp=".concat(new Date().getTime());
+      url += "&page=" + page;
 
       if (this.filters) {
         url += '&filter[tags]=' + this.filters;
@@ -19588,7 +19588,12 @@ __webpack_require__.r(__webpack_exports__);
     getImages: function getImages(page) {
       var _this = this;
 
-      axios.get(this.galleryUrl(page)).then(function (response) {
+      axios.get(this.galleryUrl(page), {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Robots-Tag': 'noindex, nofollow'
+        }
+      }).then(function (response) {
         var _response$data = response.data,
             data = _response$data.data,
             current_page = _response$data.current_page,
@@ -19687,7 +19692,12 @@ __webpack_require__.r(__webpack_exports__);
           _this = this;
 
       var url = _config__WEBPACK_IMPORTED_MODULE_0__.isNotProduction ? '/tags.json' : '/tags/';
-      axios.get(url + ((_this$filters = this.filters) !== null && _this$filters !== void 0 ? _this$filters : '')).then(function (response) {
+      axios.get(url + ((_this$filters = this.filters) !== null && _this$filters !== void 0 ? _this$filters : ''), {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Robots-Tag': 'noindex, nofollow'
+        }
+      }).then(function (response) {
         _this.navigation = response.data;
 
         _this.removeTheAllTag();
