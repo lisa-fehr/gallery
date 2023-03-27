@@ -79,10 +79,13 @@ class GenerateImages extends Command
             $thumbPath = $this->thumbnailDestination . '/' . $gallery->thumb;
             $imagePath = $this->imageDestination . '/' . $gallery->img . '.' . $gallery->type;
 
+            $thumbExtension = pathinfo($gallery->thumb, PATHINFO_EXTENSION);
+
             Image::make($originalPath)
                 ->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT)
                 ->sharpen(5)
-                ->save($thumbPath, self::THUMBNAIL_QUALITY, pathinfo($gallery->thumb, PATHINFO_EXTENSION));
+                ->limitColors(25, '#ff9900')
+                ->save($thumbPath, self::THUMBNAIL_QUALITY, $thumbExtension);
 
             $image = Image::make($originalPath);
             [$width, $height] = $this->calculateWidthHeight($image);
