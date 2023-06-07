@@ -77,15 +77,24 @@ class GenerateImages extends Command
 
         if ($gallery) {
             $thumbPath = $this->thumbnailDestination . '/' . $gallery->thumb;
-            $imagePath = $this->imageDestination . '/' . $gallery->img . '.' . $gallery->type;
 
-            $thumbExtension = pathinfo($gallery->thumb, PATHINFO_EXTENSION);
+            $imagePath = $this->imageDestination . '/' . $gallery->img;
+            if ($gallery->type === 'swf') {
+                $imagePath .= ".jpg";
+            } else {
+                $imagePath .= "." . $gallery->type;
+            }
+
+            if (file_exists($imagePath)) {
+                $this->info('Image and thumbnail already created: ' . $originalImage);
+                return;
+            }
 
             Image::make($originalPath)
                 ->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT)
                 ->sharpen(5)
                 ->limitColors(25, '#ff9900')
-                ->save($thumbPath, self::THUMBNAIL_QUALITY, $thumbExtension);
+                ->save($thumbPath, self::THUMBNAIL_QUALITY);
 
             $image = Image::make($originalPath);
             [$width, $height] = $this->calculateWidthHeight($image);
@@ -94,8 +103,10 @@ class GenerateImages extends Command
             })->save($imagePath);
 
             $this->info('Created an image and thumbnail: ' . $originalImage);
+        } elseif ($name) {
+            $this->info('Could not find img:' . $name);
         } else {
-            $this->info('Could not find: ' . $originalImage);
+            $this->info('Could not find original img:' . $originalImage);
         }
     }
 

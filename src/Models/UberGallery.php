@@ -42,6 +42,10 @@ class UberGallery extends Model
         if (Storage::disk('gallery')->exists($url)) {
             return Storage::disk('gallery')->temporaryUrl($url, Carbon::now()->addDay());
         }
+        $fallbackForSwf = $this->tag->directory . '/' . $this->img . '.jpg';
+        if (Storage::disk('gallery')->exists($fallbackForSwf)) {
+            return Storage::disk('gallery')->temporaryUrl($fallbackForSwf, Carbon::now()->addDay());
+        }
         return Storage::disk('gallery')->url('/missing-image.gif');
     }
 
