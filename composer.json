@@ -5,14 +5,13 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.1",
         "ext-json": "*",
-        "illuminate/console": "^9.0",
-        "intervention/image": "^2.6",
-        "spatie/laravel-query-builder": "^5.0"
+        "intervention/image": "^2.7.2",
+        "spatie/laravel-query-builder": "^5.3.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.2"
+        "friendsofphp/php-cs-fixer": "^3.23.0"
     },
     "autoload": {
         "psr-4": {
