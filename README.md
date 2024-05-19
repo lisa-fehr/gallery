@@ -1,6 +1,8 @@
 # gallery
 Packaged version of the recreate gallery project
 
+<img width="100%" alt="Screen Shot 2024-05-19 at 3 41 36 AM" src="https://github.com/lisa-fehr/gallery/assets/6653340/fd768d85-75fa-4c76-bebe-27a5b88e9e98">
+
 ## Run:
 
 `composer require lisa-fehr/gallery`
