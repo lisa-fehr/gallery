@@ -6,6 +6,8 @@ Packaged version of the recreate gallery project
 ## Requirements
 PHP 8.1 and up
 
+Laravel 9 and up
+
 ## Run:
 
 `composer require lisa-fehr/gallery`
