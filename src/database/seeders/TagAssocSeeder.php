@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace LisaFehr\Gallery\Database\Seeders;
 
 use LisaFehr\Gallery\Models\UberGallery;
 use LisaFehr\Gallery\Models\UberTagAssoc;
